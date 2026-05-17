@@ -21,14 +21,14 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             <Link href="/login">
               <Button
-                variant="bordered"
-                className="border-[#06B6D4] text-[#06B6D4]"
+                variant="outline"
+                className="border-[#06B6D4] hover:opacity-80 text-[#06B6D4]"
               >
                 Login
               </Button>
             </Link>
             <Link href="/register">
-              <Button className="bg-[#FACC15] text-black hover:opacity-90">
+              <Button className="bg-[#FACC15] text-black hover:opacity-80">
                 Register
               </Button>
             </Link>
