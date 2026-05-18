@@ -11,11 +11,26 @@ import {
   Card,
   TextArea,
 } from "@heroui/react";
-import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 
 const AddRoomPage = () => {
-  const [amenities, setAmenities] = useState([]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const room = Object.fromEntries(formData);
+    room.amenities = formData.getAll("amenities");
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(room),
+    });
+
+    const data = await res.json();
+    console.log(data);
+  };
 
   return (
     <div className="bg-[#E6FAFD]">
@@ -30,7 +45,7 @@ const AddRoomPage = () => {
               sanctum to welcome others. Your digital blueprint is edit-ready.
             </p>
           </div>
-          <Form className="space-y-6  p-6">
+          <Form onSubmit={handleSubmit} className="space-y-6  p-6">
             <TextField name="roomName" isRequired>
               <Label className="text-sm font-medium">Room Name</Label>
               <Input
