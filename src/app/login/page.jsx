@@ -1,8 +1,8 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Card,
-  Description,
   FieldError,
   Form,
   Input,
@@ -11,15 +11,39 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { BiCheck } from "react-icons/bi";
 import { BsGoogle } from "react-icons/bs";
 
 const LoginPage = () => {
+
+  const router = useRouter();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+
+    const user = Object.fromEntries(formData.entries());
+
+    const {data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
+
+    if (data) {
+      router.push("/");
+    }
+    if (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center py-10 bg-[#E6FAFD] ">
       <Card className="max-w-96 w-full shadow-lg border bg-[#FFF7D6] border-gray-200">
         <h1 className="text-center text-2xl font-bold">Login</h1>
-        <Form className="flex flex-col gap-4">
+        <Form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <TextField
             isRequired
             name="email"
@@ -41,8 +65,8 @@ const LoginPage = () => {
             name="password"
             type="password"
             validate={(value) => {
-              if (value.length < 8) {
-                return "Password must be at least 8 characters";
+              if (value.length < 6) {
+                return "Password must be at least 6 characters";
               }
               if (!/[A-Z]/.test(value)) {
                 return "Password must contain at least one uppercase letter";
