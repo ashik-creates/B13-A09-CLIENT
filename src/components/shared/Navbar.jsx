@@ -16,6 +16,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-8  font-medium">
             <NavLink href={"/"}>Home</NavLink>
             <NavLink href={"/rooms"}>Rooms</NavLink>
+            <NavLink href={"/add-room"}>Add Room</NavLink>
           </div>
 
           <div className="flex items-center gap-3">
