@@ -13,10 +13,12 @@ const Navbar = () => {
             <span className="text-xl font-bold text-[#06B6D4]">StudyNook</span>
           </Link>
 
-          <div className="flex items-center gap-8  font-medium">
+          <div className="flex items-center gap-8  font-medium text-sm">
             <NavLink href={"/"}>Home</NavLink>
             <NavLink href={"/rooms"}>Rooms</NavLink>
             <NavLink href={"/add-room"}>Add Room</NavLink>
+            <NavLink href={"/my-listings"}>My Listings</NavLink>
+            <NavLink href={"/my-bookings"}>My Bookings</NavLink>
           </div>
 
           <div className="flex items-center gap-3">

@@ -8,6 +8,7 @@ import {
   FaDollarSign,
 } from "react-icons/fa";
 import { BiCheckCircle } from "react-icons/bi";
+import BookingModal from "@/components/roomDetailsPage/BookingModal";
 
 
 const RoomDetailsPage = async ({ params }) => {
@@ -82,9 +83,7 @@ const RoomDetailsPage = async ({ params }) => {
                 </div>
               </div>
 
-              <Button className="w-full bg-[#06B6D4] text-white">
-                Book Now
-              </Button>
+              <BookingModal hourlyRate={hourlyRate}></BookingModal>
             </Card>
           </div>
         </div>
