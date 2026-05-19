@@ -7,13 +7,13 @@ const Navbar = () => {
   return (
     <div>
       <nav className="w-full border-b bg-linear-to-br from-[#E6FAFD]  to-[#FFF7D6]">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+          <Link href="/"className="flex items-center gap-2">
             <FaBookOpen className="text-2xl text-[#FACC15]" />
             <span className="text-xl font-bold text-[#06B6D4]">StudyNook</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8  font-medium">
+          <div className="flex items-center gap-8  font-medium">
             <NavLink href={"/"}>Home</NavLink>
             <NavLink href={"/rooms"}>Rooms</NavLink>
             <NavLink href={"/add-room"}>Add Room</NavLink>
