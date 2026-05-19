@@ -1,22 +1,30 @@
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import React from "react";
+import RoomCard from "../shared/RoomCard";
 
-const AvailableSection = () => {
+const AvailableSection = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/latest`);
+  const rooms = await res.json();
+
   return (
-    <div>
+    <div className="bg-[#FFF7D6] pb-5">
       <div className="container mx-auto py-10">
-        <div className="py-5">
+        <div className="py-5 flex items-center justify-between">
           <div>
-            <h2>Available Study Rooms</h2>
-            <p>Rooms recently added to StudyNook.</p>
+            <h2 className="text-3xl font-bold text-gray-800">
+              Available Study Rooms
+            </h2>
+            <p className="text-gray-600">Rooms recently added to StudyNook.</p>
           </div>
           <Link href={"/rooms"}>
-            <Button>Browse All Room</Button>
+            <Button className={"bg-[#06B6D4]"}>Browse All Rooms</Button>
           </Link>
         </div>
-        <div>
-            
+        <div className="grid grid-cols-3 gap-10">
+          {rooms.map((room) => (
+            <RoomCard key={room._id} room={room}></RoomCard>
+          ))}
         </div>
       </div>
     </div>
