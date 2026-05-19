@@ -4,7 +4,7 @@ import { FaClock, FaShieldAlt, FaUsers } from "react-icons/fa";
 const WhyChoose = () => {
   return (
     <section className="py-20 bg-[#E6FAFD] ">
-      <div className="max-w-6xl mx-auto px-6 text-center">
+      <div className="container mx-auto  text-center">
         <h2 className="text-3xl font-bold mb-12">Why Choose StudyNook?</h2>
 
         <div className="grid md:grid-cols-3 gap-8">

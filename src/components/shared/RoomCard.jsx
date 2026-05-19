@@ -22,13 +22,13 @@ const RoomCard = ({ room }) => {
   const remaining = amenities.length - 3;
 
   return (
-    <Card className="rounded-2xl bg-[#E6FAFD] shadow-lg overflow-hidden w-full max-w-sm flex flex-col border border-gray-200">
+    <Card className="rounded-2xl group bg-[#E6FAFD] shadow-lg overflow-hidden w-full max-w-sm flex flex-col border border-gray-200">
       <div className="relative w-full h-52">
         <Image
           src={image}
           alt={roomName}
           fill
-          className="object-cover rounded-t-2xl"
+          className="object-cover rounded-t-2xl transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
