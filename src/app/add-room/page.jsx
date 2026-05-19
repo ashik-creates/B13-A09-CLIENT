@@ -11,9 +11,11 @@ import {
   Card,
   TextArea,
 } from "@heroui/react";
+import { redirect, useRouter } from "next/navigation";
 import { FaCheck } from "react-icons/fa";
 
 const AddRoomPage = () => {
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -30,6 +32,9 @@ const AddRoomPage = () => {
 
     const data = await res.json();
     console.log(data);
+    if (data.insertedId) {
+      router.push("/rooms")
+    }
   };
 
   return (
