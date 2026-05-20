@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {
   Form,
   Button,
@@ -11,29 +12,42 @@ import {
   Card,
   TextArea,
 } from "@heroui/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FaCheck } from "react-icons/fa";
 
 const AddRoomPage = () => {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
   const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const room = Object.fromEntries(formData);
     room.amenities = formData.getAll("amenities");
+    const roomObj = {
+      ...room,
+      ownerId: user?.id,
+      ownerName: user?.name,
+      ownerImage: user?.image,
+      bookingCount: 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
 
+    console.log(roomObj);
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(room),
+      body: JSON.stringify(roomObj),
     });
 
     const data = await res.json();
     console.log(data);
     if (data.insertedId) {
-      router.push("/rooms")
+      // router.push("/rooms");
     }
   };
 

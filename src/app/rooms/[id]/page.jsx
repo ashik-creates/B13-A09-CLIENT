@@ -1,14 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Chip, Button, Card } from "@heroui/react";
+import { Chip, Card } from "@heroui/react";
 import {
   FaArrowLeft,
-  FaLayerGroup,
-  FaUsers,
-  FaDollarSign,
 } from "react-icons/fa";
 import { BiCheckCircle } from "react-icons/bi";
-import BookingModal from "@/components/roomDetailsPage/BookingModal";
+import BookingCard from "@/ui/BookingCard";
 
 
 const RoomDetailsPage = async ({ params }) => {
@@ -62,29 +59,7 @@ const RoomDetailsPage = async ({ params }) => {
           </Card>
 
           <div>
-            <Card className="p-6 rounded-3xl shadow-lg border bg-[#FFF7D6]">
-              <div className="text-3xl font-bold text-primary mb-1">
-                ${hourlyRate}
-                <span className="text-sm text-gray-500 font-normal">
-                  {" "}
-                  / hour
-                </span>
-              </div>
-
-              <div className="space-y-3 text-sm text-gray-700 my-6">
-                <div className="flex items-center gap-3">
-                  <FaLayerGroup /> {floor}
-                </div>
-                <div className="flex items-center gap-3">
-                  <FaUsers /> Up to {capacity} people
-                </div>
-                <div className="flex items-center gap-3">
-                  <FaDollarSign /> Total 10 bookings
-                </div>
-              </div>
-
-              <BookingModal hourlyRate={hourlyRate}></BookingModal>
-            </Card>
+            <BookingCard room={room}></BookingCard>
           </div>
         </div>
       </div>

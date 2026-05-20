@@ -33,7 +33,7 @@ const hours = [
   "20:00",
 ];
 
-const BookingModal = ({ hourlyRate }) => {
+const BookingModal = ({ hourlyRate, roomName }) => {
   const hourlyRateNum = parseInt(hourlyRate);
   const minDate = today(getLocalTimeZone());
   const [startTime, setStartTime] = useState(hours[0]);
@@ -64,7 +64,7 @@ const BookingModal = ({ hourlyRate }) => {
             <Modal.CloseTrigger />
 
             <Modal.Header>
-              <Modal.Heading>Book Group Studio West</Modal.Heading>
+              <Modal.Heading>{roomName}</Modal.Heading>
               <p className="text-sm text-gray-500">
                 Pick a date and time slot. Bookings run on the hour.
               </p>
@@ -198,7 +198,7 @@ const BookingModal = ({ hourlyRate }) => {
             </Modal.Body>
 
             <Modal.Footer className="flex justify-end gap-3">
-              <Button variant="light">Cancel</Button>
+              <Button variant="light" slot={"close"}>Cancel</Button>
               <Button className="bg-[#06B6D4] text-white">
                 Confirm Booking
               </Button>
