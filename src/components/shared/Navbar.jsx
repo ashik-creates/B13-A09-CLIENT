@@ -1,20 +1,17 @@
 "use client";
-import { Button } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import { FaBookOpen } from "react-icons/fa";
 import NavLink from "./NavLink";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import {
-  Dropdown,
-  Avatar,
-} from "@heroui/react";
+import { Dropdown, Avatar } from "@heroui/react";
 import { FiLogOut } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
   const router = useRouter();
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
   const handleLogout = async () => {
@@ -35,13 +32,19 @@ const Navbar = () => {
           <div className="flex items-center gap-8  font-medium text-sm">
             <NavLink href={"/"}>Home</NavLink>
             <NavLink href={"/rooms"}>Rooms</NavLink>
-            <NavLink href={"/add-room"}>Add Room</NavLink>
-            <NavLink href={"/my-listings"}>My Listings</NavLink>
-            <NavLink href={"/my-bookings"}>My Bookings</NavLink>
+            {user && (
+              <>
+                <NavLink href={"/add-room"}>Add Room</NavLink>
+                <NavLink href={"/my-listings"}>My Listings</NavLink>
+                <NavLink href={"/my-bookings"}>My Bookings</NavLink>
+              </>
+            )}
           </div>
 
           <div className="flex items-center gap-3">
-            {!user ? (
+            {isPending ? (
+              <Spinner size="sm" />
+            ) : !user ? (
               <>
                 <Link href="/login">
                   <Button
@@ -59,7 +62,7 @@ const Navbar = () => {
               </>
             ) : (
               <Dropdown>
-                <Dropdown.Trigger className="rounded-full p-1 bg-white border border-gray-200 ">
+                <Dropdown.Trigger className="rounded-full p-1 bg-white border border-gray-200">
                   <div className="flex items-center gap-2">
                     <Avatar>
                       <Avatar.Image alt={user?.name} src={user?.image} />
@@ -68,14 +71,11 @@ const Navbar = () => {
                     <p className="text-sm font-medium">{user?.name}</p>
                   </div>
                 </Dropdown.Trigger>
+
                 <Dropdown.Popover className="mr-5">
                   <Dropdown.Menu>
-                    <Dropdown.Item
-                      id="item-1"
-                      textValue="Item 1"
-                      className="hover:bg-surface-secondary"
-                    >
-                      <div className=" bg-white overflow-hidden">
+                    <Dropdown.Item textValue="profile">
+                      <div className="bg-white overflow-hidden">
                         <div className="px-4 py-3 border-b">
                           <p className="font-semibold text-sm">{user.name}</p>
                           <p className="text-xs text-gray-500">{user.email}</p>
@@ -98,9 +98,9 @@ const Navbar = () => {
                         <Button
                           onClick={handleLogout}
                           variant="outline"
-                          className="w-full text-red-600 mt-3 flex items-center gap-2  text-sm "
+                          className="w-full text-red-600 mt-3 flex items-center gap-2 text-sm"
                         >
-                          <FiLogOut />
+                          <FiLogOut></FiLogOut>
                           Log out
                         </Button>
                       </div>
