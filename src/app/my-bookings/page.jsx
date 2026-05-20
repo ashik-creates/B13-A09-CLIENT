@@ -5,8 +5,8 @@ import { FiCalendar } from "react-icons/fi";
 const MyBookingsPage = () => {
   return (
     <div className="bg-[#E6FAFD]">
-      <div className="container mx-auto py-10">
-        <div className="flex items-center justify-between mb-10">
+      <div className="container mx-auto py-5">
+        <div className="flex items-center justify-between mb-10 border-b-2 border-dashed border-gray-300 pb-5">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">My Bookings</h1>
             <p className="text-gray-500 mt-1">

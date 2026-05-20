@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Chip, Card } from "@heroui/react";
-import {
-  FaArrowLeft,
-} from "react-icons/fa";
+import { Chip, Card, Avatar } from "@heroui/react";
+import { FaArrowLeft } from "react-icons/fa";
 import { BiCheckCircle } from "react-icons/bi";
 import BookingCard from "@/ui/BookingCard";
-
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`);
   const room = await res.json();
+
+  console.log(room)
 
   const {
     roomName,
@@ -21,6 +20,10 @@ const RoomDetailsPage = async ({ params }) => {
     capacity,
     hourlyRate,
     amenities = [],
+    bookingCount,
+    ownerName,
+    ownerImage,
+    ownerEmail,
   } = room;
 
   return (
@@ -40,7 +43,7 @@ const RoomDetailsPage = async ({ params }) => {
               <div className="flex justify-between items-center">
                 <h1 className="text-4xl font-bold mb-2">{roomName}</h1>
                 <Chip size="lg" className="bg-[#E6FAFD] text-[#06B6D4]">
-                  <BiCheckCircle></BiCheckCircle>10 bookings
+                  <BiCheckCircle></BiCheckCircle>{bookingCount} bookings
                 </Chip>
               </div>
               <p className="text-gray-600 leading-relaxed">{description}</p>
@@ -58,8 +61,21 @@ const RoomDetailsPage = async ({ params }) => {
             </div>
           </Card>
 
-          <div>
+          <div className="space-y-7">
             <BookingCard room={room}></BookingCard>
+            <Card className="p-5 rounded-3xl border shadow-md">
+              <p className="text-xs text-gray-500 mb-3">LISTED BY</p>
+              <div className="flex items-center gap-3">
+                <Avatar size="lg">
+                  <Avatar.Image src={ownerImage} />
+                  <Avatar.Fallback>{ownerName.charAt(0)}</Avatar.Fallback>
+                </Avatar>
+                <div>
+                  <p className="font-semibold">{ownerName}</p>
+                  <p className="text-sm text-gray-500">{ownerEmail}</p>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </div>

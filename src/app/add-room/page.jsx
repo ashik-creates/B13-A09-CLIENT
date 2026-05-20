@@ -30,6 +30,7 @@ const AddRoomPage = () => {
       ownerId: user?.id,
       ownerName: user?.name,
       ownerImage: user?.image,
+      ownerEmail: user?.email,
       bookingCount: 0,
       createdAt: new Date(),
       updatedAt: new Date(),

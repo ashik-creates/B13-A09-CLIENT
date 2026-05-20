@@ -1,10 +1,17 @@
 import BookingModal from "@/components/roomDetailsPage/BookingModal";
-import { Card } from "@heroui/react";
+import { auth } from "@/lib/auth";
+import { Button, Card } from "@heroui/react";
+import { headers } from "next/headers";
 import React from "react";
 import { FaDollarSign, FaLayerGroup, FaUsers } from "react-icons/fa";
 
-const BookingCard = ({ room }) => {
+const BookingCard = async ({ room }) => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const user = session?.user;
   const {
+    ownerId,
     roomName,
     description,
     image,
@@ -12,7 +19,11 @@ const BookingCard = ({ room }) => {
     capacity,
     hourlyRate,
     amenities = [],
+    bookingCount,
   } = room;
+
+  const isSameOwner = ownerId === user?.id;
+
   return (
     <div>
       <Card className="p-6 rounded-3xl shadow-lg border bg-[#FFF7D6]">
@@ -29,11 +40,25 @@ const BookingCard = ({ room }) => {
             <FaUsers /> Up to {capacity} people
           </div>
           <div className="flex items-center gap-3">
-            <FaDollarSign /> Total 10 bookings
+            <FaDollarSign /> Total {bookingCount} bookings
           </div>
         </div>
 
-        <BookingModal hourlyRate={hourlyRate} roomName={roomName}></BookingModal>
+        <BookingModal
+          hourlyRate={hourlyRate}
+          roomName={roomName}
+        ></BookingModal>
+
+        {isSameOwner && (
+          <div className="flex items-center gap-2 mt-3">
+            <Button variant="outline" className={"flex-1"}>
+              Edit
+            </Button>
+            <Button variant="danger" className={"flex-1"}>
+              Delete
+            </Button>
+          </div>
+        )}
       </Card>
     </div>
   );

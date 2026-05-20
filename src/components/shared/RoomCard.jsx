@@ -28,6 +28,7 @@ const RoomCard = ({ room }) => {
           src={image}
           alt={roomName}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover rounded-t-2xl transition-transform duration-500 group-hover:scale-105"
         />
       </div>

@@ -16,6 +16,8 @@ import {
 } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { BsArrowDown } from "react-icons/bs";
+import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
 
 const hours = [
   "08:00",
@@ -34,6 +36,10 @@ const hours = [
 ];
 
 const BookingModal = ({ hourlyRate, roomName }) => {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+
   const hourlyRateNum = parseInt(hourlyRate);
   const minDate = today(getLocalTimeZone());
   const [startTime, setStartTime] = useState(hours[0]);
@@ -53,6 +59,10 @@ const BookingModal = ({ hourlyRate, roomName }) => {
   const start = parseInt(startTime.split(":")[0]);
   const end = parseInt(endTime.split(":")[0]);
   const totalCost = (end - start) * hourlyRateNum;
+
+  if(!user){
+    return <Link href={"/login"}><Button className="w-full bg-[#06B6D4] text-white">Login To Book</Button></Link>
+  }
 
   console.log(startTime, endTime);
   return (
@@ -198,7 +208,9 @@ const BookingModal = ({ hourlyRate, roomName }) => {
             </Modal.Body>
 
             <Modal.Footer className="flex justify-end gap-3">
-              <Button variant="light" slot={"close"}>Cancel</Button>
+              <Button variant="light" slot={"close"}>
+                Cancel
+              </Button>
               <Button className="bg-[#06B6D4] text-white">
                 Confirm Booking
               </Button>
