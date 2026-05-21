@@ -13,6 +13,7 @@ import {
   DateField,
   Calendar,
   FieldError,
+  Alert,
 } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { BsArrowDown } from "react-icons/bs";
@@ -35,15 +36,20 @@ const hours = [
   "20:00",
 ];
 
-const BookingModal = ({ hourlyRate, roomName }) => {
+const BookingModal = ({ room }) => {
+  const { _Id, roomName, image, hourlyRate } = room;
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-
   const hourlyRateNum = parseInt(hourlyRate);
+
   const minDate = today(getLocalTimeZone());
+
   const [startTime, setStartTime] = useState(hours[0]);
   const [endTime, setEndTime] = useState(hours[1]);
+  const [date, setDate] = useState(minDate);
+  const [message, setMessage] = useState("");
+  const [opMsg, setOpMsg] = useState("");
 
   const startIndex = hours.indexOf(startTime);
 
@@ -51,7 +57,8 @@ const BookingModal = ({ hourlyRate, roomName }) => {
     setStartTime(time);
 
     const nextIndex = hours.indexOf(time) + 1;
-    if (nextIndex >= hours.indexOf(endTime)) {
+
+    if (nextIndex > hours.indexOf(endTime)) {
       setEndTime(hours[nextIndex]);
     }
   };
@@ -60,11 +67,39 @@ const BookingModal = ({ hourlyRate, roomName }) => {
   const end = parseInt(endTime.split(":")[0]);
   const totalCost = (end - start) * hourlyRateNum;
 
-  if(!user){
-    return <Link href={"/login"}><Button className="w-full bg-[#06B6D4] text-white">Login To Book</Button></Link>
-  }
+  const handleSubmit = () => {
+    const bookingDate = date.toString();
+    const today = minDate.toString();
 
-  console.log(startTime, endTime);
+    if (bookingDate < today) {
+      setMessage("Please select a future date");
+      return;
+    }
+    const bookingData = {
+      roomId: _Id,
+      userId: user?.id,
+      roomName,
+      roomImage: image,
+      bookingDate,
+      startTime,
+      endTime,
+      totalCost,
+      note: opMsg,
+      createAt: new Date(),
+      updatedAt: new Date(),
+    };
+    console.log(bookingData)
+  };
+
+  if (!user) {
+    return (
+      <Link href={"/login"}>
+        <Button className="w-full bg-[#06B6D4] text-white">
+          Login To Book
+        </Button>
+      </Link>
+    );
+  }
   return (
     <Modal>
       <Button className="w-full bg-[#06B6D4] text-white">Book Now</Button>
@@ -83,7 +118,8 @@ const BookingModal = ({ hourlyRate, roomName }) => {
             <Modal.Body>
               <Surface className="space-y-4 p-4">
                 <DatePicker
-                  defaultValue={minDate}
+                  value={date}
+                  onChange={(value) => setDate(value)}
                   minValue={minDate}
                   aria-label="Select Booking Date"
                   className="w-full"
@@ -140,6 +176,7 @@ const BookingModal = ({ hourlyRate, roomName }) => {
                       value={startTime}
                       onChange={handleStartChange}
                       defaultSelectedKey={hours[0]}
+                      aria-label="Select start time"
                     >
                       <Select.Trigger className="w-full border border-gray-200 rounded-xl bg-white p-2.5 flex items-center justify-between">
                         <Select.Value />
@@ -170,6 +207,7 @@ const BookingModal = ({ hourlyRate, roomName }) => {
                       value={endTime}
                       onChange={(value) => setEndTime(value)}
                       defaultSelectedKey={endTime}
+                      aria-label="Select end time"
                     >
                       <Select.Trigger className="w-full border border-gray-200 rounded-xl bg-white p-2.5 flex items-center justify-between">
                         <Select.Value placeholder="Select time" />
@@ -195,7 +233,11 @@ const BookingModal = ({ hourlyRate, roomName }) => {
 
                 <div className="flex flex-col gap-2">
                   <Label>Special note (optional)</Label>
-                  <TextArea placeholder="Any setup needed?" />
+                  <TextArea
+                    value={opMsg}
+                    onChange={(e) => setOpMsg(e.target.value)}
+                    placeholder="Any setup needed?"
+                  />
                 </div>
 
                 <div className="bg-[#F4F1EB] rounded-xl p-4 flex justify-between items-center">
@@ -207,11 +249,16 @@ const BookingModal = ({ hourlyRate, roomName }) => {
               </Surface>
             </Modal.Body>
 
+            {message && <Alert className="bg-red-100 my-2">{message}</Alert>}
+
             <Modal.Footer className="flex justify-end gap-3">
               <Button variant="light" slot={"close"}>
                 Cancel
               </Button>
-              <Button className="bg-[#06B6D4] text-white">
+              <Button
+                onClick={handleSubmit}
+                className="bg-[#06B6D4] text-white"
+              >
                 Confirm Booking
               </Button>
             </Modal.Footer>

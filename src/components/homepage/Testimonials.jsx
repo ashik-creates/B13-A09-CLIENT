@@ -21,7 +21,7 @@ const Testimonials = () => {
   return (
     <div className="py-20 bg-[#FFF7D6]">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-12">What Students Say</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-12">What Students Say</h2>
 
         <div className="grid md:grid-cols-3 gap-8">
           {students.map((student) => {

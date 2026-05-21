@@ -45,8 +45,7 @@ const BookingCard = async ({ room }) => {
         </div>
 
         <BookingModal
-          hourlyRate={hourlyRate}
-          roomName={roomName}
+          room={room}
         ></BookingModal>
 
         {isSameOwner && (
