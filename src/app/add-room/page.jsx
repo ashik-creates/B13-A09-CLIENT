@@ -37,8 +37,7 @@ const AddRoomPage = () => {
       updatedAt: new Date(),
     };
 
-    console.log(roomObj);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

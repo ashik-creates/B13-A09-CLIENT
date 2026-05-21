@@ -7,7 +7,7 @@ import BookingCard from "@/ui/BookingCard";
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${id}`);
   const room = await res.json();
 
   const {

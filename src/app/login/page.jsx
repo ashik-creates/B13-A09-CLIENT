@@ -17,21 +17,21 @@ import { BiCheck } from "react-icons/bi";
 import { BsGoogle } from "react-icons/bs";
 
 const LoginPage = () => {
-
   const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(e.currentTarget);
 
     const user = Object.fromEntries(formData.entries());
 
-    const {data, error } = await authClient.signIn.email({
+    const { data, error } = await authClient.signIn.email({
       email: user.email,
       password: user.password,
     });
 
     if (data) {
+      toast.success("Successfully logged in");
       router.push("/");
     }
     if (error) {

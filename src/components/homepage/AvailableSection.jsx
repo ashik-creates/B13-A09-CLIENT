@@ -4,7 +4,7 @@ import React from "react";
 import RoomCard from "../shared/RoomCard";
 
 const AvailableSection = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/latest`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/latest`);
   const rooms = await res.json();
 
   return (

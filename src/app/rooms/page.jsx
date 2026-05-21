@@ -2,7 +2,7 @@ import RoomCard from "@/components/shared/RoomCard";
 import React from "react";
 
 const AllRoomsPage = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms`);
   const rooms = await res.json();
 
   if(rooms.length === 0){

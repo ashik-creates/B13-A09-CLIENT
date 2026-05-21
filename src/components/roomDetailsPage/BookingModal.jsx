@@ -95,7 +95,7 @@ const BookingModal = ({ room }) => {
       updatedAt: new Date(),
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/booking`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

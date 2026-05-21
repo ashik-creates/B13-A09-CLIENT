@@ -13,7 +13,7 @@ const MyListingsPage = async () => {
   const user = session?.user;
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-listings/${user?.id}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/my-listings/${user?.id}`,
   );
 
   const rooms = await res.json();
