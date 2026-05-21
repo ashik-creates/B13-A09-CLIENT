@@ -19,6 +19,8 @@ import { today, getLocalTimeZone } from "@internationalized/date";
 import { BsArrowDown } from "react-icons/bs";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const hours = [
   "08:00",
@@ -37,7 +39,9 @@ const hours = [
 ];
 
 const BookingModal = ({ room }) => {
-  const { _Id, roomName, image, hourlyRate } = room;
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const { _id, roomName, image, hourlyRate } = room;
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
@@ -67,16 +71,17 @@ const BookingModal = ({ room }) => {
   const end = parseInt(endTime.split(":")[0]);
   const totalCost = (end - start) * hourlyRateNum;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const bookingDate = date.toString();
     const today = minDate.toString();
 
     if (bookingDate < today) {
-      setMessage("Please select a future date");
+      setMessage("Please select today or a future date");
       return;
     }
+
     const bookingData = {
-      roomId: _Id,
+      roomId: _id,
       userId: user?.id,
       roomName,
       roomImage: image,
@@ -84,11 +89,31 @@ const BookingModal = ({ room }) => {
       startTime,
       endTime,
       totalCost,
+      status: "confirmed",
       note: opMsg,
       createAt: new Date(),
       updatedAt: new Date(),
     };
-    console.log(bookingData)
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingData),
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+      toast.error(data.error);
+      return;
+    }
+    if (data.insertedId) {
+      toast.success("Booking successful");
+      setIsOpen(false);
+      router.refresh();
+    }
   };
 
   if (!user) {
@@ -102,8 +127,13 @@ const BookingModal = ({ room }) => {
   }
   return (
     <Modal>
-      <Button className="w-full bg-[#06B6D4] text-white">Book Now</Button>
-      <Modal.Backdrop>
+      <Button
+        onClick={() => setIsOpen(true)}
+        className="w-full bg-[#06B6D4] text-white"
+      >
+        Book Now
+      </Button>
+      <Modal.Backdrop isOpen={isOpen} onOpenChange={setIsOpen}>
         <Modal.Container>
           <Modal.Dialog className="max-w-md rounded-2xl bg-[#FFF7D6]">
             <Modal.CloseTrigger />
@@ -249,7 +279,9 @@ const BookingModal = ({ room }) => {
               </Surface>
             </Modal.Body>
 
-            {message && <Alert className="bg-red-100 my-2">{message}</Alert>}
+            {message && (
+              <Alert className="bg-red-100 my-2 text-sm">{message}</Alert>
+            )}
 
             <Modal.Footer className="flex justify-end gap-3">
               <Button variant="light" slot={"close"}>

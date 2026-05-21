@@ -10,15 +10,10 @@ const RoomDetailsPage = async ({ params }) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`);
   const room = await res.json();
 
-  console.log(room)
-
   const {
     roomName,
     description,
     image,
-    floor,
-    capacity,
-    hourlyRate,
     amenities = [],
     bookingCount,
     ownerName,

@@ -13,6 +13,7 @@ import {
   TextArea,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
 
 const AddRoomPage = () => {
@@ -48,7 +49,8 @@ const AddRoomPage = () => {
     const data = await res.json();
     console.log(data);
     if (data.insertedId) {
-      // router.push("/rooms");
+      toast.success("Room added successfully");
+      router.push("/my-listings");
     }
   };
 
@@ -84,7 +86,7 @@ const AddRoomPage = () => {
               <FieldError className="text-xs text-danger" />
             </TextField>
 
-            <TextField name="image" type="url">
+            <TextField name="image" type="url" isRequired>
               <Label className="text-sm font-medium">Image URL</Label>
               <Input
                 className="rounded-full border-border/60"
@@ -93,30 +95,33 @@ const AddRoomPage = () => {
               <FieldError className="text-xs text-danger" />
             </TextField>
 
-            <div className="flex gap-4 w-full">
-              <TextField name="floor" className="flex-1">
+            <div className="flex gap-4 w-full ">
+              <TextField name="floor" className="flex-1" isRequired>
                 <Label className="text-sm font-medium">Floor</Label>
                 <Input
                   className="rounded-full border-border/60"
                   placeholder="3rd Floor"
                 />
+                <FieldError className="text-xs text-danger" />
               </TextField>
 
-              <TextField name="capacity" type="number" className="flex-1">
+              <TextField name="capacity" type="number" className="flex-1" isRequired>
                 <Label className="text-sm font-medium">Capacity</Label>
                 <Input
                   className="rounded-full border-border/60"
                   placeholder="4"
                 />
+                <FieldError className="text-xs text-danger" />
               </TextField>
             </div>
 
-            <TextField name="hourlyRate" type="number">
+            <TextField name="hourlyRate" type="number" isRequired>
               <Label className="text-sm font-medium">Hourly Rate ($)</Label>
               <Input
                 className="rounded-full border-border/60"
                 placeholder="5"
               />
+              <FieldError className="text-xs text-danger" />
             </TextField>
 
             <div>
