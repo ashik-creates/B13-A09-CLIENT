@@ -11,9 +11,17 @@ const MyBookingsPage = async () => {
   });
 
   const user = session?.user;
-
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/my-bookings/${user?.id}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
   );
 
   const bookings = await res.json();
@@ -60,7 +68,10 @@ const MyBookingsPage = async () => {
         ) : (
           <div className="space-y-4">
             {bookings.map((booking) => (
-              <MyBookingCard key={booking._id} booking={booking}></MyBookingCard>
+              <MyBookingCard
+                key={booking._id}
+                booking={booking}
+              ></MyBookingCard>
             ))}
           </div>
         )}

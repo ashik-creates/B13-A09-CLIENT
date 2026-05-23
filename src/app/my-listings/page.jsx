@@ -12,8 +12,17 @@ const MyListingsPage = async () => {
 
   const user = session?.user;
 
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/my-listings/${user?.id}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
   );
 
   const rooms = await res.json();
