@@ -60,6 +60,7 @@ const EditModal = ({ room }) => {
 
     if (data.modifiedCount > 0) {
       toast.success("Room updated successfully");
+      router.refresh();
     }
   };
 
@@ -218,6 +219,7 @@ const EditModal = ({ room }) => {
 
                     <Button
                       type="submit"
+                      slot="close"
                       className="w-fit bg-[#06B6D4] rounded-full"
                     >
                       Save Changes

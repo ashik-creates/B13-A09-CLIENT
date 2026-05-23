@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import React from "react";
 import { FaDollarSign, FaLayerGroup, FaUsers } from "react-icons/fa";
 import EditModal from "./EditModal";
+import DeleteAlert from "./DeleteAlert";
 
 const BookingCard = async ({ room }) => {
   const session = await auth.api.getSession({
@@ -42,9 +43,9 @@ const BookingCard = async ({ room }) => {
             <div className="flex-1">
               <EditModal room={room}></EditModal>
             </div>
-            <Button variant="danger" className={"flex-1"}>
-              Delete
-            </Button>
+            <div className="flex-1">
+              <DeleteAlert room={room}></DeleteAlert>
+            </div>
           </div>
         )}
       </Card>

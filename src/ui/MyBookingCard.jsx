@@ -3,12 +3,14 @@ import Image from "next/image";
 import React from "react";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import BookingCancelAlert from "./BookingCancelAlert";
+import Link from "next/link";
 
 const MyBookingCard = ({ booking }) => {
 
   const todayDate = today(getLocalTimeZone()).toString();
 
   const {
+    roomId,
     roomName,
     roomImage,
     bookingDate,
@@ -34,7 +36,7 @@ const MyBookingCard = ({ booking }) => {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">{roomName}</h2>
+          <Link href={`/rooms/${roomId}`}><h2 className="text-xl hover:text-[#06B6D4] font-semibold text-gray-800">{roomName}</h2></Link>
 
           <p className="text-sm text-gray-500 mt-1">{bookingDate}</p>
 
