@@ -104,9 +104,9 @@ const LoginPage = () => {
         </Button>
 
         <p className="text-center">
-          {"Already have an account? "}
-          <Link href={"/login"}>
-            <span className="text-[#b4930c] cursor-pointer bl">Login</span>
+          {"Don't have an account? "}
+          <Link href={"/register"}>
+            <span className="text-[#b4930c] cursor-pointer bl">Register</span>
           </Link>
         </p>
       </Card>

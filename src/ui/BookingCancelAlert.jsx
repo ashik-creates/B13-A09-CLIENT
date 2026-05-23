@@ -1,18 +1,24 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const BookingCancelAlert = ({ booking }) => {
   const router = useRouter();
-  const { _id, userId } = booking;
+  const { _id } = booking;
+  
   const handleCancel = async () => {
+
+    const {data:tokenData} = await authClient.token()
+
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bookings/${_id}/cancel`,
       {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId }),
+        headers: { "Content-Type": "application/json",
+           authorization: `Bearer ${tokenData?.token}`
+         },
       },
     );
 

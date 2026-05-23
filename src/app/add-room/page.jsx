@@ -104,7 +104,12 @@ const AddRoomPage = () => {
                 <FieldError className="text-xs text-danger" />
               </TextField>
 
-              <TextField name="capacity" type="number" className="flex-1" isRequired>
+              <TextField
+                name="capacity"
+                type="number"
+                className="flex-1"
+                isRequired
+              >
                 <Label className="text-sm font-medium">Capacity</Label>
                 <Input
                   className="rounded-full border-border/60"
@@ -166,10 +171,10 @@ const AddRoomPage = () => {
                             )}
                           </Checkbox.Indicator>
                         </Checkbox.Control>
+                        <Checkbox.Content>
+                          <Label htmlFor={`amenity-${item}`}>{item}</Label>
+                        </Checkbox.Content>
                       </Checkbox>
-                      <Checkbox.Content>
-                        <Label htmlFor={`amenity-${item}`}>{item}</Label>
-                      </Checkbox.Content>
                     </label>
                   );
                 })}

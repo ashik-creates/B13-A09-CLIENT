@@ -4,23 +4,14 @@ import { Button, Card } from "@heroui/react";
 import { headers } from "next/headers";
 import React from "react";
 import { FaDollarSign, FaLayerGroup, FaUsers } from "react-icons/fa";
+import EditModal from "./EditModal";
 
 const BookingCard = async ({ room }) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   const user = session?.user;
-  const {
-    ownerId,
-    roomName,
-    description,
-    image,
-    floor,
-    capacity,
-    hourlyRate,
-    amenities = [],
-    bookingCount,
-  } = room;
+  const { ownerId, floor, capacity, hourlyRate, bookingCount } = room;
 
   const isSameOwner = ownerId === user?.id;
 
@@ -44,15 +35,13 @@ const BookingCard = async ({ room }) => {
           </div>
         </div>
 
-        <BookingModal
-          room={room}
-        ></BookingModal>
+        <BookingModal room={room}></BookingModal>
 
         {isSameOwner && (
           <div className="flex items-center gap-2 mt-3">
-            <Button variant="outline" className={"flex-1"}>
-              Edit
-            </Button>
+            <div className="flex-1">
+              <EditModal room={room}></EditModal>
+            </div>
             <Button variant="danger" className={"flex-1"}>
               Delete
             </Button>

@@ -59,7 +59,7 @@ const MyListingsPage = async () => {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 gap-5">
             {rooms.map((room) => (
               <RoomCard key={room._id} room={room}></RoomCard>
             ))}
