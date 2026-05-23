@@ -39,6 +39,12 @@ const LoginPage = () => {
     }
   };
 
+  const googleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
   return (
     <div className="flex justify-center items-center py-10 bg-[#E6FAFD] ">
       <Card className="max-w-96 w-full shadow-lg border bg-[#FFF7D6] border-gray-200">
@@ -98,7 +104,7 @@ const LoginPage = () => {
           <div className="whitespace-nowrap"> Or sign up with </div>
           <Separator />
         </div>
-        <Button className="max-w-96 w-full mx-auto bg-white" variant="outline">
+        <Button onClick={googleSignIn} className="max-w-96 w-full mx-auto bg-white" variant="outline">
           <BsGoogle className="text-[#06B6D4]" />
           Login with google
         </Button>
@@ -106,7 +112,7 @@ const LoginPage = () => {
         <p className="text-center">
           {"Don't have an account? "}
           <Link href={"/register"}>
-            <span className="text-[#b4930c] cursor-pointer bl">Register</span>
+            <span className="text-[#b4930c] cursor-pointer">Register</span>
           </Link>
         </p>
       </Card>

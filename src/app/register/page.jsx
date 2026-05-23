@@ -48,6 +48,12 @@ const RegisterPage = () => {
     router.push("/login");
   };
 
+  const googleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
   return (
     <div className="flex justify-center items-center py-10 bg-[#FFF7D6]">
       <Card className="max-w-96 w-full shadow-lg border bg-[#E6FAFD] border-gray-200">
@@ -113,11 +119,7 @@ const RegisterPage = () => {
             <FieldError />
           </TextField>
 
-          {message && (
-            <Alert className="bg-red-300">
-              {message}
-            </Alert>
-          )}
+          {message && <Alert className="bg-red-300">{message}</Alert>}
 
           <div className="flex gap-2">
             <Button className="w-full bg-[#FACC15] text-black" type="submit">
@@ -133,7 +135,11 @@ const RegisterPage = () => {
           <Separator />
         </div>
 
-        <Button className="max-w-96 w-full mx-auto bg-white" variant="outline">
+        <Button
+          onClick={googleSignIn}
+          className="max-w-96 w-full mx-auto bg-white"
+          variant="outline"
+        >
           <BsGoogle className="text-[#FACC15]" />
           Login with google
         </Button>

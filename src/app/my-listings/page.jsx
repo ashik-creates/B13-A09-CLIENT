@@ -47,7 +47,7 @@ const MyListingsPage = async () => {
         </div>
 
         {rooms.length === 0 ? (
-          <div className="border-2  border-gray-200 rounded-2xl py-20 flex flex-col items-center justify-center text-center bg-[#FFF7D6]">
+          <div className="border-2  border-gray-200 rounded-2xl py-20 flex flex-col items-center justify-center text-center bg-[#E6FAFD]">
             <div className="bg-[#bae8f0] p-6 rounded-full mb-6">
               <FiPlusCircle className="text-4xl text-[#06B6D4]" />
             </div>
