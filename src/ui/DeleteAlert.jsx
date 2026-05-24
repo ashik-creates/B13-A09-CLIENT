@@ -46,7 +46,7 @@ const DeleteAlert = ({ room }) => {
                 permanent and cannot be undone.
               </p>
             </AlertDialog.Body>
-            <AlertDialog.Footer>
+            <AlertDialog.Footer className="flex flex-wrap gap-4">
               <Button slot="close" variant="outline">
                 Keep Room
               </Button>

@@ -199,8 +199,8 @@ const BookingModal = ({ room }) => {
                   </DatePicker.Popover>
                 </DatePicker>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
+                <div className="flex flex-wrap sm:grid sm:grid-cols-2 gap-3">
+                  <div className="flex-1">
                     <Label className="text-sm font-medium mb-1 block">
                       Start
                     </Label>
@@ -231,7 +231,7 @@ const BookingModal = ({ room }) => {
                     </Select>
                   </div>
 
-                  <div>
+                  <div className="flex-1">
                     <Label className="text-sm font-medium mb-1 block">
                       End
                     </Label>
@@ -285,7 +285,7 @@ const BookingModal = ({ room }) => {
               <Alert className="bg-red-100 my-2 text-sm">{message}</Alert>
             )}
 
-            <Modal.Footer className="flex justify-end gap-3">
+            <Modal.Footer className="flex flex-wrap justify-end gap-3">
               <Button variant="light" slot={"close"}>
                 Cancel
               </Button>

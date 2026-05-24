@@ -39,7 +39,7 @@ const BookingCard = async ({ room }) => {
         <BookingModal room={room}></BookingModal>
 
         {isSameOwner && (
-          <div className="flex items-center gap-2 mt-3">
+          <div className="flex flex-wrap items-center gap-2 mt-3">
             <div className="flex-1">
               <EditModal room={room}></EditModal>
             </div>

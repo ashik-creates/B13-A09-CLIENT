@@ -70,7 +70,7 @@ const RoomDetailsPage = async ({ params }) => {
             <BookingCard room={room}></BookingCard>
             <Card className="p-5 rounded-3xl border shadow-md">
               <p className="text-xs text-gray-500 mb-3">LISTED BY</p>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center flex-wrap gap-3">
                 <Avatar size="lg">
                   <Avatar.Image src={ownerImage} />
                   <Avatar.Fallback>{ownerName.charAt(0)}</Avatar.Fallback>

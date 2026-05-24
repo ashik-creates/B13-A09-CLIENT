@@ -55,7 +55,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center py-10 bg-[#FFF7D6]">
+    <div className="flex justify-center items-center px-4 py-10 bg-[#FFF7D6]">
       <Card className="max-w-96 w-full shadow-lg border bg-[#E6FAFD] border-gray-200">
         <h1 className="text-center text-2xl font-bold">Register</h1>
 

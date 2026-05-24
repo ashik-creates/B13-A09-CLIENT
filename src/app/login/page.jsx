@@ -46,7 +46,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center py-10 bg-[#E6FAFD] ">
+    <div className="flex justify-center px-4 items-center py-10 bg-[#E6FAFD] ">
       <Card className="max-w-96 w-full shadow-lg border bg-[#FFF7D6] border-gray-200">
         <h1 className="text-center text-2xl font-bold">Login</h1>
         <Form onSubmit={handleSubmit} className="flex flex-col gap-4">

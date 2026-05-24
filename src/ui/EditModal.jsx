@@ -122,7 +122,7 @@ const EditModal = ({ room }) => {
                       <FieldError />
                     </TextField>
 
-                    <div className="flex gap-4 w-full">
+                    <div className="flex flex-wrap gap-4 w-full">
                       <TextField
                         name="floor"
                         className="flex-1"
