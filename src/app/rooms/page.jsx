@@ -19,8 +19,8 @@ const AllRoomsPage = async ({ searchParams }) => {
 
   return (
     <div className="bg-[#FFF7D6] py-10 min-h-screen">
-      <div className="container mx-auto">
-        <div className="border-b-2 border-dashed border-gray-300 pb-5 flex items-end justify-between">
+      <div className="container mx-auto px-4 sm:px-0">
+        <div className="border-b-2 border-dashed border-gray-300 pb-5 flex items-end justify-between flex-wrap gap-5">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">
               All Rooms
@@ -39,8 +39,12 @@ const AllRoomsPage = async ({ searchParams }) => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-12 gap-6 mt-6 items-start">
+        <div className="lg:grid lg:grid-cols-12 gap-6 mt-6 items-start space-y-5">
+          <div className="col-span-3 lg:hidden">
+            <RoomSearchCard />
+          </div>
           <div className="col-span-9">
+            <p className="text-gray-500 pb-4">Showing rooms</p>
             {rooms.length === 0 ? (
               <div className="bg-white border border-gray-300 rounded-2xl py-20 flex items-center justify-center">
                 <p className="text-gray-500 text-lg font-medium">
@@ -48,7 +52,7 @@ const AllRoomsPage = async ({ searchParams }) => {
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid  md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {rooms.map((room) => (
                   <RoomCard
                     key={room._id}
@@ -59,7 +63,7 @@ const AllRoomsPage = async ({ searchParams }) => {
             )}
           </div>
 
-          <div className="col-span-3 sticky top-5">
+          <div className="col-span-3 hidden lg:flex">
             <RoomSearchCard />
           </div>
         </div>

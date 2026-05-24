@@ -20,10 +20,10 @@ const Testimonials = () => {
           ] 
   return (
     <div className="py-20 bg-[#FFF7D6]">
-      <div className="container mx-auto text-center">
+      <div className="container mx-auto px-4 sm:px-0 text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-12">What Students Say</h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {students.map((student) => {
             return (
               <Card key={student.name} className="p-8 rounded-2xl shadow-lg border border-gray-200 flex flex-col bg-[#E6FAFD]">

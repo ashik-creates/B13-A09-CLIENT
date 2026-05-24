@@ -22,7 +22,7 @@ const RoomCard = ({ room }) => {
   const remaining = amenities.length - 3;
 
   return (
-    <Card className="rounded-2xl group bg-[#E6FAFD] shadow-lg overflow-hidden w-full h-full max-w-sm flex flex-col border border-gray-200">
+    <Card className="rounded-2xl group bg-[#E6FAFD] shadow-lg overflow-hidden w-full h-full flex flex-col border border-gray-200">
       <div className="relative w-full h-52">
         <Image
           src={image}
@@ -38,7 +38,7 @@ const RoomCard = ({ room }) => {
 
         <p className="text-sm text-gray-600">{shortDesc}</p>
 
-        <div className="flex items-center gap-4 text-sm text-gray-700">
+        <div className="flex items-center flex-wrap gap-4 text-sm text-gray-700">
           <span className="flex items-center gap-2">
             <FaLayerGroup /> {floor}
           </span>

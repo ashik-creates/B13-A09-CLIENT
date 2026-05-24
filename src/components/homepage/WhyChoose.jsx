@@ -4,10 +4,10 @@ import { FaClock, FaShieldAlt, FaUsers } from "react-icons/fa";
 const WhyChoose = () => {
   return (
     <section className="py-20 bg-[#E6FAFD] ">
-      <div className="container mx-auto  text-center">
+      <div className="container mx-auto px-4 sm:px-0  text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-12">Why Choose StudyNook?</h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Card className="p-8 rounded-2xl shadow-lg border border-gray-200 bg-[#FFF7D6]">
             <FaClock className="text-4xl text-cyan-600 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">Easy Booking</h3>

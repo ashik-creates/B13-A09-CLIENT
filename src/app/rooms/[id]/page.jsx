@@ -7,7 +7,9 @@ import BookingCard from "@/ui/BookingCard";
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${id}`,
+  );
   const room = await res.json();
 
   const {
@@ -23,25 +25,33 @@ const RoomDetailsPage = async ({ params }) => {
 
   return (
     <div className="bg-[#E6FAFD]">
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto py-10 px-4 sm:px-0">
         <Link href="/rooms" className="flex items-center gap-2 mb-6 text-sm">
           <FaArrowLeft /> Back
         </Link>
 
-        <div className="grid grid-cols-3 gap-10">
-          <Card className="col-span-2 space-y-6 bg-[#FFF7D6]">
+        <div className="grid md:grid-cols-3 gap-10">
+          <Card className="md:col-span-2 space-y-6 bg-[#FFF7D6]">
             <div className="relative w-full h-105 rounded-3xl overflow-hidden">
-              <Image src={image} alt={roomName} fill className="object-cover" />
+              <Image
+                src={image}
+                alt={roomName}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                fill
+                className="object-cover"
+              />
             </div>
 
-            <div>
-              <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center flex-wrap gap-5">
+              <div className="space-y-3">
                 <h1 className="text-4xl font-bold mb-2">{roomName}</h1>
-                <Chip size="lg" className="bg-[#E6FAFD] text-[#06B6D4]">
-                  <BiCheckCircle></BiCheckCircle>{bookingCount} bookings
-                </Chip>
+                <p className="text-gray-600 leading-relaxed">{description}</p>
               </div>
-              <p className="text-gray-600 leading-relaxed">{description}</p>
+
+              <Chip size="lg" className="bg-[#E6FAFD] text-[#06B6D4]">
+                <BiCheckCircle></BiCheckCircle>
+                {bookingCount} bookings
+              </Chip>
             </div>
 
             <div>

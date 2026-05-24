@@ -58,7 +58,7 @@ const AddRoomPage = () => {
 
   return (
     <div className="bg-[#E6FAFD]">
-      <div className="container mx-auto py-10 flex justify-center items-center">
+      <div className="container mx-auto px-4 sm:px-0 py-10 flex justify-center items-center">
         <Card className="shadow-lg max-w-2xl border bg-[#FFF7D6] border-gray-200">
           <div className="max-w-4xl mx-auto mb-5">
             <h1 className="text-4xl font-serif font-bold text-[#1A2E35] mb-2">
@@ -97,7 +97,7 @@ const AddRoomPage = () => {
               <FieldError className="text-xs text-danger" />
             </TextField>
 
-            <div className="flex gap-4 w-full ">
+            <div className="flex gap-4 w-full items-center flex-wrap">
               <TextField name="floor" className="flex-1" isRequired>
                 <Label className="text-sm font-medium">Floor</Label>
                 <Input
@@ -133,7 +133,7 @@ const AddRoomPage = () => {
 
             <div>
               <p className="text-base font-semibold mb-3">Amenities</p>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {[
                   "Whiteboard",
                   "Projector",

@@ -29,7 +29,7 @@ const MyListingsPage = async () => {
 
   return (
     <div className="bg-[#FFF7D6]">
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto py-10 px-4 sm:px-0">
         <div className="flex items-center justify-between mb-5 border-b-2 border-dashed border-gray-300 pb-5">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">My Listings</h1>
@@ -47,7 +47,7 @@ const MyListingsPage = async () => {
         </div>
 
         {rooms.length === 0 ? (
-          <div className="border-2  border-gray-200 rounded-2xl py-20 flex flex-col items-center justify-center text-center bg-[#E6FAFD]">
+          <div className="border-2  border-gray-200 rounded-2xl py-20 flex flex-col items-center justify-center px-4 text-center bg-[#E6FAFD]">
             <div className="bg-[#bae8f0] p-6 rounded-full mb-6">
               <FiPlusCircle className="text-4xl text-[#06B6D4]" />
             </div>
@@ -68,7 +68,7 @@ const MyListingsPage = async () => {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {rooms.map((room) => (
               <RoomCard key={room._id} room={room}></RoomCard>
             ))}

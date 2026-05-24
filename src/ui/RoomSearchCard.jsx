@@ -45,7 +45,7 @@ const RoomSearchCard = () => {
   };
 
   return (
-    <div className="bg-[#f0df9c] border border-gray-200 rounded-3xl p-6 shadow-sm space-y-6">
+    <div className="bg-[#f0df9c] border w-full border-gray-200 rounded-3xl p-6 shadow-sm space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-gray-800">
           Find Your Study Space

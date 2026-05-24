@@ -9,8 +9,8 @@ const AvailableSection = async () => {
 
   return (
     <div className="bg-[#FFF7D6] pb-5">
-      <div className="container mx-auto py-10">
-        <div className="py-5 flex items-center justify-between">
+      <div className="container mx-auto py-10 px-4 sm:px-0">
+        <div className="py-5 flex flex-wrap items-center justify-between gap-4 ">
           <div>
             <h2 className="text-3xl font-bold text-gray-800">
               Available Study Rooms
@@ -21,7 +21,7 @@ const AvailableSection = async () => {
             <Button className={"bg-[#06B6D4]"}>Browse All Rooms</Button>
           </Link>
         </div>
-        <div className="grid grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7 items-center">
           {rooms.map((room) => (
             <RoomCard key={room._id} room={room}></RoomCard>
           ))}
