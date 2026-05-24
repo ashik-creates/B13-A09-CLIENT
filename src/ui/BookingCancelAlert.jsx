@@ -2,36 +2,49 @@
 import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 const BookingCancelAlert = ({ booking }) => {
-  const router = useRouter();
-  const { _id } = booking;
-  
-  const handleCancel = async () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const {data:tokenData} = await authClient.token()
+  const { _id } = booking;
+
+  const handleCancel = async () => {
+    setIsLoading(true);
+    const { data: tokenData } = await authClient.token();
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bookings/${_id}/cancel`,
       {
         method: "PATCH",
-        headers: { "Content-Type": "application/json",
-           authorization: `Bearer ${tokenData?.token}`
-         },
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
       },
     );
 
     const data = await res.json();
-    if (data.modifiedCount > 0) {
-      toast.success("Booking is canceled successfully");
-      router.refresh();
+
+    setIsLoading(false);
+
+    if (data.modifiedCount) {
+      toast.success("Booking cancelled");
+      setIsOpen(false);
     }
   };
 
   return (
-    <AlertDialog>
-      <Button variant="outline" className="text-red-500 bg-white">Cancel</Button>
+    <AlertDialog isOpen={isOpen} onOpenChange={setIsOpen}>
+      <Button
+        onClick={() => setIsOpen(true)}
+        variant="outline"
+        className="text-red-500 bg-white"
+      >
+        Cancel
+      </Button>
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
           <AlertDialog.Dialog>
@@ -50,8 +63,12 @@ const BookingCancelAlert = ({ booking }) => {
               <Button slot="close" variant="outline">
                 Keep Booking
               </Button>
-              <Button onClick={handleCancel} slot="close" variant="danger">
-                Yes, Cancel Booking
+              <Button
+                isDisabled={isLoading}
+                onClick={handleCancel}
+                variant="danger"
+              >
+                {isLoading ? "Canceling..." : "Yes, Cancel Booking"}
               </Button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>

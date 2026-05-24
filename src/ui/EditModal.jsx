@@ -14,12 +14,16 @@ import {
   TextField,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 import { BiEdit } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa";
 
 const EditModal = ({ room }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const {
     _id,
     roomName,
@@ -34,6 +38,7 @@ const EditModal = ({ room }) => {
   const router = useRouter();
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -56,18 +61,24 @@ const EditModal = ({ room }) => {
     );
 
     const data = await res.json();
-    console.log(data);
 
-    if (data.modifiedCount > 0) {
+    setIsLoading(false);
+
+    if (data) {
       toast.success("Room updated successfully");
+      setIsOpen(false);
       router.refresh();
     }
   };
 
   return (
     <div>
-      <Modal>
-        <Button variant="outline" className="w-full text-[#06B6D4] bg-white">
+      <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
+        <Button
+          onClick={() => setIsOpen(true)}
+          variant="outline"
+          className="w-full text-[#06B6D4] bg-white"
+        >
           Edit
         </Button>
 
@@ -219,10 +230,10 @@ const EditModal = ({ room }) => {
 
                     <Button
                       type="submit"
-                      slot="close"
+                      isDisabled={isLoading}
                       className="w-fit bg-[#06B6D4] rounded-full"
                     >
-                      Save Changes
+                      {isLoading ? "Saving..." : "Save Changes"}
                     </Button>
                   </form>
                 </Surface>

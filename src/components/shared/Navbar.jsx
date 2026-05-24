@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Dropdown, Avatar } from "@heroui/react";
+import { Button, Spinner, Dropdown, Avatar } from "@heroui/react";
 import { FaBookOpen, FaBars } from "react-icons/fa";
 import NavLink from "./NavLink";
 import Link from "next/link";
@@ -14,7 +14,7 @@ const Navbar = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
 
   const user = session?.user;
 
@@ -50,7 +50,9 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          {!user ? (
+          {isPending ? (
+            <Spinner size="sm" />
+          ) : !user ? (
             <div className="hidden sm:flex justify-center items-center gap-2">
               <Link href="/login">
                 <Button
@@ -83,26 +85,24 @@ const Navbar = () => {
 
               <Dropdown.Popover className="w-[90vw] max-w-[260px] mr-2">
                 <Dropdown.Menu>
-                  <Dropdown.Item textValue="profile">
-                    <div className="bg-white overflow-hidden ">
+                  <Dropdown.Item textValue="profile" className="hover:bg-white">
+                    <div className="bg-white mx-auto overflow-hidden ">
                       <div className="px-4 py-3 border-b">
                         <p className="font-semibold text-sm">{user?.name}</p>
 
-                        <p className="text-xs text-gray-500 break-all">
-                          {user?.email}
-                        </p>
+                        <p className="text-xs text-gray-500 break-all">{user?.email}</p>
                       </div>
 
                       <Link
                         href="/my-listings"
-                        className="block px-4 py-3 text-sm hover:bg-gray-50"
+                        className="block px-4 py-3 text-sm hover:text-[#FACC15]"
                       >
                         My Listings
                       </Link>
 
                       <Link
                         href="/my-bookings"
-                        className="block px-4 py-3 text-sm hover:bg-gray-50 border-b"
+                        className="block px-4 py-3 text-sm  border-b hover:text-[#FACC15]"
                       >
                         My Bookings
                       </Link>

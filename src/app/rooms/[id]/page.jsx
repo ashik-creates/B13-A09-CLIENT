@@ -5,6 +5,19 @@ import { FaArrowLeft } from "react-icons/fa";
 import { BiCheckCircle } from "react-icons/bi";
 import BookingCard from "@/ui/BookingCard";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${id}`,
+  );
+
+  const room = await res.json();
+
+  return {
+    title: room.roomName,
+  };
+}
+
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
   const res = await fetch(

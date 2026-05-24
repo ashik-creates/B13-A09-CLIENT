@@ -9,7 +9,7 @@ const Error = ({ error, reset }) => {
   }, [error]);
 
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center px-4 text-center">
+    <div className="min-h-[80vh] flex flex-col items-center justify-center p-4 text-center">
       <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-6 shadow-sm border border-red-100">
         <svg
           className="w-10 h-10"

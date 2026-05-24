@@ -5,6 +5,10 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import MyBookingCard from "@/ui/MyBookingCard";
 
+export const metadata = {
+  title: "My Bookings",
+};
+
 const MyBookingsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

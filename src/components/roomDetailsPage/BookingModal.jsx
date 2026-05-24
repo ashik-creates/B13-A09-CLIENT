@@ -39,6 +39,7 @@ const hours = [
 ];
 
 const BookingModal = ({ room }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const { _id, roomName, image, hourlyRate } = room;
@@ -72,6 +73,7 @@ const BookingModal = ({ room }) => {
   const totalCost = (end - start) * hourlyRateNum;
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     const bookingDate = date.toString();
     const today = minDate.toString();
 
@@ -94,18 +96,22 @@ const BookingModal = ({ room }) => {
       createAt: new Date(),
       updatedAt: new Date(),
     };
-    const {data:tokenData} = await authClient.token()
+    const { data: tokenData } = await authClient.token();
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/booking`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${tokenData?.token}`
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/booking`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+        body: JSON.stringify(bookingData),
       },
-      body: JSON.stringify(bookingData),
-    });
+    );
 
     const data = await res.json();
+    setIsLoading(false);
 
     if (data.error) {
       toast.error(data.error);
@@ -290,10 +296,11 @@ const BookingModal = ({ room }) => {
                 Cancel
               </Button>
               <Button
+                isDisabled={isLoading}
                 onClick={handleSubmit}
                 className="bg-[#06B6D4] text-white"
               >
-                Confirm Booking
+                {isLoading ? "Booking..." : "Confirm Booking"}
               </Button>
             </Modal.Footer>
           </Modal.Dialog>

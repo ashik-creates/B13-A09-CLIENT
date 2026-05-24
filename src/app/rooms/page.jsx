@@ -5,6 +5,10 @@ import Link from "next/link";
 import React from "react";
 import { FiPlusCircle } from "react-icons/fi";
 
+export const metadata = {
+  title: "Rooms",
+};
+
 const AllRoomsPage = async ({ searchParams }) => {
   const params = await searchParams;
 
