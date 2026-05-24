@@ -31,7 +31,7 @@ const BookingCancelAlert = ({ booking }) => {
 
   return (
     <AlertDialog>
-      <Button variant="danger">Cancel</Button>
+      <Button variant="outline" className="text-red-500 bg-white">Cancel</Button>
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
           <AlertDialog.Dialog>

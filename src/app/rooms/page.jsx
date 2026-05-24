@@ -7,36 +7,60 @@ import { FiPlusCircle } from "react-icons/fi";
 
 const AllRoomsPage = async ({ searchParams }) => {
   const params = await searchParams;
+
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms?search=${params?.search}&amenities=${params?.amenities}&min=${params?.min}&max=${params?.max}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms?search=${params?.search || ""}&amenities=${params?.amenities || ""}&min=${params?.min || ""}&max=${params?.max || ""}`,
+    {
+      cache: "no-store",
+    }
   );
 
   const rooms = await res.json();
 
   return (
-    <div className="bg-[#FFF7D6] py-10">
+    <div className="bg-[#FFF7D6] py-10 min-h-screen">
       <div className="container mx-auto">
         <div className="border-b-2 border-dashed border-gray-300 pb-5 flex items-end justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">All Rooms</h1>
+            <h1 className="text-3xl font-bold text-gray-800">
+              All Rooms
+            </h1>
+
             <p className="text-gray-600">
               Browse all rooms and book your favorite one.
             </p>
           </div>
-          <Link href={"/add-room"}><Button className={"bg-[#06B6D4] hover:opacity-90 flex items-center"}><FiPlusCircle /> Add Room</Button></Link>
+
+          <Link href="/add-room">
+            <Button className="bg-[#06B6D4] hover:opacity-90 flex items-center text-white">
+              <FiPlusCircle />
+              Add Room
+            </Button>
+          </Link>
         </div>
-        <div className="grid grid-cols-12 gap-3 mt-3 items-start">
-          <div className="grid grid-cols-3 col-span-9 gap-10 items-start">
+
+        <div className="grid grid-cols-12 gap-6 mt-6 items-start">
+          <div className="col-span-9">
             {rooms.length === 0 ? (
-              <p>No room available</p>
+              <div className="bg-white border border-gray-300 rounded-2xl py-20 flex items-center justify-center">
+                <p className="text-gray-500 text-lg font-medium">
+                  No rooms available.
+                </p>
+              </div>
             ) : (
-              rooms.map((room) => (
-                <RoomCard key={room._id} room={room}></RoomCard>
-              ))
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {rooms.map((room) => (
+                  <RoomCard
+                    key={room._id}
+                    room={room}
+                  />
+                ))}
+              </div>
             )}
           </div>
-          <div className="col-span-3">
-            <RoomSearchCard></RoomSearchCard>
+
+          <div className="col-span-3 sticky top-5">
+            <RoomSearchCard />
           </div>
         </div>
       </div>

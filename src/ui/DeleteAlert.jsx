@@ -31,7 +31,7 @@ const DeleteAlert = ({ room }) => {
 
   return (
     <AlertDialog>
-      <Button variant="danger" className="w-full">Delete</Button>
+      <Button variant="outline" className="w-full text-red-500 bg-white">Delete</Button>
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
           <AlertDialog.Dialog>

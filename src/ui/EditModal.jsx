@@ -67,7 +67,7 @@ const EditModal = ({ room }) => {
   return (
     <div>
       <Modal>
-        <Button variant="outline" className="w-full">
+        <Button variant="outline" className="w-full text-[#06B6D4] bg-white">
           Edit
         </Button>
 
