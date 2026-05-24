@@ -79,6 +79,7 @@ const BookingModal = ({ room }) => {
 
     if (bookingDate < today) {
       setMessage("Please select today or a future date");
+      setIsLoading(false)
       return;
     }
 
