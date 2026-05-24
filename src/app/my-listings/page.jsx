@@ -30,7 +30,7 @@ const MyListingsPage = async () => {
   return (
     <div className="bg-[#FFF7D6]">
       <div className="container mx-auto py-10 px-4 sm:px-0">
-        <div className="flex items-center justify-between mb-5 border-b-2 border-dashed border-gray-300 pb-5">
+        <div className="flex items-center flex-wrap gap-5 justify-between mb-5 border-b-2 border-dashed border-gray-300 pb-5">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">My Listings</h1>
             <p className="text-gray-500 mt-1">

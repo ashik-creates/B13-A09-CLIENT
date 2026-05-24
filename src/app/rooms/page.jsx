@@ -12,7 +12,7 @@ const AllRoomsPage = async ({ searchParams }) => {
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms?search=${params?.search || ""}&amenities=${params?.amenities || ""}&min=${params?.min || ""}&max=${params?.max || ""}`,
     {
       cache: "no-store",
-    }
+    },
   );
 
   const rooms = await res.json();
@@ -22,9 +22,7 @@ const AllRoomsPage = async ({ searchParams }) => {
       <div className="container mx-auto px-4 sm:px-0">
         <div className="border-b-2 border-dashed border-gray-300 pb-5 flex items-end justify-between flex-wrap gap-5">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">
-              All Rooms
-            </h1>
+            <h1 className="text-3xl font-bold text-gray-800">All Rooms</h1>
 
             <p className="text-gray-600">
               Browse all rooms and book your favorite one.
@@ -44,7 +42,6 @@ const AllRoomsPage = async ({ searchParams }) => {
             <RoomSearchCard />
           </div>
           <div className="col-span-9">
-            <p className="text-gray-500 pb-4">Showing rooms</p>
             {rooms.length === 0 ? (
               <div className="bg-white border border-gray-300 rounded-2xl py-20 flex items-center justify-center">
                 <p className="text-gray-500 text-lg font-medium">
@@ -52,14 +49,14 @@ const AllRoomsPage = async ({ searchParams }) => {
                 </p>
               </div>
             ) : (
-              <div className="grid  md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {rooms.map((room) => (
-                  <RoomCard
-                    key={room._id}
-                    room={room}
-                  />
-                ))}
-              </div>
+              <>
+                <p className="text-gray-500 pb-4">Showing rooms</p>
+                <div className="grid  md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {rooms.map((room) => (
+                    <RoomCard key={room._id} room={room} />
+                  ))}
+                </div>
+              </>
             )}
           </div>
 

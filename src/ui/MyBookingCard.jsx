@@ -23,8 +23,9 @@ const MyBookingCard = ({ booking }) => {
   const isDateOver = bookingDate >= todayDate;
 
   return (
-    <div className="bg-[#FFF7D6] border border-gray-200 rounded-2xl p-4 flex items-center justify-between gap-5 shadow-sm">
-      <div className="flex items-center gap-4">
+    <div className="bg-[#FFF7D6] border border-gray-200 rounded-2xl p-4 flex 
+    items-start sm:text-center flex-col sm:flex-row justify-between gap-5 shadow-sm">
+      <div className="flex max-[400px]:flex-col gap-5">
         <div className="relative w-28 h-24 rounded-xl overflow-hidden ">
           <Image
             src={roomImage}

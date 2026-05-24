@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Spinner, Dropdown, Avatar } from "@heroui/react";
+import { Button, Dropdown, Avatar } from "@heroui/react";
 import { FaBookOpen, FaBars } from "react-icons/fa";
 import NavLink from "./NavLink";
 import Link from "next/link";
@@ -14,7 +14,7 @@ const Navbar = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session } = authClient.useSession();
 
   const user = session?.user;
 
@@ -50,9 +50,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          {isPending ? (
-            <Spinner size="sm" />
-          ) : !user ? (
+          {!user ? (
             <div className="hidden sm:flex justify-center items-center gap-2">
               <Link href="/login">
                 <Button
@@ -90,7 +88,9 @@ const Navbar = () => {
                       <div className="px-4 py-3 border-b">
                         <p className="font-semibold text-sm">{user?.name}</p>
 
-                        <p className="text-xs text-gray-500 break-all">{user?.email}</p>
+                        <p className="text-xs text-gray-500 break-all">
+                          {user?.email}
+                        </p>
                       </div>
 
                       <Link

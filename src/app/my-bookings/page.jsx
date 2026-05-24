@@ -27,8 +27,8 @@ const MyBookingsPage = async () => {
   const bookings = await res.json();
   return (
     <div className="bg-[#E6FAFD]">
-      <div className="container mx-auto py-5">
-        <div className="flex items-center justify-between mb-10 border-b-2 border-dashed border-gray-300 pb-5">
+      <div className="container mx-auto py-5 px-4 sm:px-0">
+        <div className="flex items-center  flex-wrap gap-5 justify-between mb-10 border-b-2 border-dashed border-gray-300 pb-5">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">My Bookings</h1>
             <p className="text-gray-500 mt-1">
@@ -45,7 +45,7 @@ const MyBookingsPage = async () => {
         </div>
 
         {bookings.length === 0 ? (
-          <div className="border-2 border-gray-200 rounded-2xl py-20 flex flex-col items-center justify-center text-center bg-[#FFF7D6]">
+          <div className="border-2 border-gray-200 rounded-2xl px-4 py-20 flex flex-col items-center justify-center text-center bg-[#FFF7D6]">
             <div className="bg-[#bae8f0] p-6 rounded-full mb-6">
               <FiCalendar className="text-4xl text-[#06B6D4]" />
             </div>
