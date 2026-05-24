@@ -6,6 +6,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 const BookingCancelAlert = ({ booking }) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,8 +32,9 @@ const BookingCancelAlert = ({ booking }) => {
     setIsLoading(false);
 
     if (data.modifiedCount) {
-      toast.success("Booking cancelled");
       setIsOpen(false);
+      toast.success("Booking cancelled");
+      router.refresh()
     }
   };
 
