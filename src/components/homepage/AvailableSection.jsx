@@ -8,6 +8,9 @@ import RoomCard from "../shared/RoomCard";
 const AvailableSection = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/latest`,
+    {
+      cache: "no-store",
+    },
   );
   const rooms = await res.json();
 
