@@ -36,7 +36,7 @@ const Login = () => {
     setIsLoading(false)
 
     if (data) {
-      toast.success("Successfully logged in");
+      toast.success("Welcome Back!");
       router.push("/");
     }
     if (error) {

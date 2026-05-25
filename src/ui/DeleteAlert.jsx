@@ -32,7 +32,7 @@ const DeleteAlert = ({ room }) => {
     setIsLoading(false);
 
     if (data) {
-      toast.success("Room is deleted successfully");
+      toast.success("Room deleted successfully");
       router.push("/my-listings");
     }
   };

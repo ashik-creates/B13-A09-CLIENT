@@ -119,7 +119,7 @@ const BookingModal = ({ room }) => {
       return;
     }
     if (data.insertedId) {
-      toast.success("Booking successful");
+      toast.success("Room booked successfully");
       setIsOpen(false);
       router.refresh();
     }
