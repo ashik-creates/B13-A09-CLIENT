@@ -11,17 +11,15 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { BiCheck } from "react-icons/bi";
 import { BsGoogle } from "react-icons/bs";
 
 const Login = () => {
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e) => {
-    setIsLoading(true)
+    setIsLoading(true);
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -32,13 +30,14 @@ const Login = () => {
       email: user.email,
       password: user.password,
     });
-    
-    setIsLoading(false)
+
+    setIsLoading(false);
 
     if (data) {
       toast.success("Welcome Back!");
-      router.push("/");
+      window.location.href = "/";
     }
+
     if (error) {
       toast.error(error.message);
     }
@@ -98,7 +97,11 @@ const Login = () => {
 
           <div></div>
           <div className="flex gap-2 ">
-            <Button isDisabled={isLoading} className={"w-full bg-[#06B6D4] text-white"} type="submit">
+            <Button
+              isDisabled={isLoading}
+              className={"w-full bg-[#06B6D4] text-white"}
+              type="submit"
+            >
               <BiCheck />
               {isLoading ? "Login..." : "Login"}
             </Button>
@@ -109,7 +112,11 @@ const Login = () => {
           <div className="whitespace-nowrap"> Or sign up with </div>
           <Separator />
         </div>
-        <Button onClick={googleSignIn} className="max-w-96 w-full mx-auto bg-white" variant="outline">
+        <Button
+          onClick={googleSignIn}
+          className="max-w-96 w-full mx-auto bg-white"
+          variant="outline"
+        >
           <BsGoogle className="text-[#06B6D4]" />
           Login with google
         </Button>

@@ -26,7 +26,7 @@ const MyListingsPage = async () => {
       headers: {
         authorization: `Bearer ${token}`,
       },
-    },
+    },   
   );
 
   const rooms = await res.json();
