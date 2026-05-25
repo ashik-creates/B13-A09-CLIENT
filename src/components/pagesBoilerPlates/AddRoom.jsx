@@ -189,7 +189,7 @@ const AddRoom = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-[#06B6D4] rounded-full">
+            <Button isDisabled={isLoading} type="submit" className="w-full bg-[#06B6D4] rounded-full">
               {isLoading ? "Creating..." : "Create Room"}
             </Button>
           </Form>
