@@ -74,5 +74,89 @@ Provides toast notifications for booking actions, login/logout feedback, and use
 
 Used for modern icons throughout the UI to improve visual appearance and usability.
 
+## 🚀 Run the Project Locally
+
+### 1. Clone the Repositories
+
+```bash
+# Client
+git clone https://github.com/ashik-creates/studynook-client.git
+
+# Server
+git clone https://github.com/ashik-creates/studynook-server.git
+```
+
+### 2. Navigate to the Project Directories
+
+For the client:
+
+```bash
+cd studynook-client
+```
+
+Open another terminal and navigate to the server:
+
+```bash
+cd studynook-server
+```
+
+### 3. Install Dependencies
+
+Run the following command in both the client and server directories:
+
+```bash
+npm install
+```
+
+### 4. Configure Environment Variables
+
+Create a `.env.local` file in the client project and a `.env` file in the server project.
+
+#### Client (.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+#### Server (.env)
+
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+BETTER_AUTH_SECRET=your_secret_key
+BETTER_AUTH_URL=http://localhost:5000
+CLIENT_URL=http://localhost:3000
+```
+
+> Replace the placeholder values with your own credentials.
+
+### 5. Start the Development Servers
+
+Start the backend server:
+
+```bash
+npm run dev
+```
+
+Start the frontend application:
+
+```bash
+npm run dev
+```
+
+### 6. Open the Application
+
+Visit the application in your browser:
+
+```
+http://localhost:3000
+```
+
+The frontend will communicate with the backend running on:
+
+```
+http://localhost:5000
+```
+
 Live URL:
 https://b13-a09-client-five.vercel.app/
